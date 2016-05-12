@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      
+<!--beautiful sidepanel template from: https://github.com/CartoDB/cartodb-publishing-templates-->
+      
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css"/>
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/makeitresponsive.css">
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700|Noto+Sans' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.8"></script>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script> 
+      
+<!--Bootstrap links-->
+      <!-- Latest compiled and misnified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+<!-- CSS SECTION -->
+      
+<style>
+      
+    body{
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        color: #fff;
+        background-color: #333;
+        margin: 8px 0 0 0;
+        }
+    h1{
+        font-family: 'PT Sans', sans-serif;
+        font-weight: 400;
+        font-size: 32px;
+        color: #c8f180;
+        line-height: 33px;
+        text-align: left;
+        }
+    h2{
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: 400;
+        font-size: 28px;
+        color: #FFF;
+        line-height: 33px;
+        text-align: left;
+        }
+    h3{
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: 700; 
+        font-size: 15px; 
+        color: #3f538a; 
+        text-transform: uppercase; 
+        margin: 18px 0 20px 0;
+        }
+    p{
+        margin: 8px 0 1px 0; 
+        line-height: 18px;
+        }
+    p2{
+        font-size: 13px;
+        color: azure;
+        }
+    a, a:visited{
+        color: #AFEEEE;
+        text-decoration: none;
+        border-bottom:1px dotted;
+        }
+    a:hover{
+        border-bottom:2px dotted;
+        color: #addef3;
+        text-decoration: none;
+        }
+    select{
+        background-color: #E0FAE9;
+        color: #3f538a;
+        font-size: 17px;
+        padding: 5px;
+        width: 90%;
+        font-size: 13px;
+        cursor: pointer;
+        margin-left: 16px;
+        }
+    label {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        color: #FFF;
+    }
+    .wrapper{
+        display: block; 
+        padding: 4px 30px 0 30px;
+        }
+    .map{
+        background-color:#eee; 
+        position: absolute; 
+        top: 0; left: 0; 
+        bottom: 0; 
+        width: 72%; 
+        *height:100%;
+        }
+    .sidepanel{
+        background-color:#00b185;
+        position: absolute; 
+        top: 0; 
+        right: 0; 
+        bottom: 0; 
+        width: 28%; 
+        height: 100%; 
+        overflow: auto;
+        }
+    .context{
+        border-top: 4px dotted #c8f180; 
+        margin-top: 30px;
+        font-family: 'PT Sans', sans-serif;
+        font-size: 15px; 
+        color: #fff;
+        }
+    .subheader{
+        border-bottom: 4px dotted #c8f180;
+        }
+    .footer{
+        border-top: 4px dotted #c8f180; 
+        margin-top: 30px;
+        font-family: 'PT Sans', sans-serif;
+        font-size: 15px; 
+        color: #fff;
+        }
+    .map-layer-selection{
+        cursor: pointer;
+        margin-top: 15px;
+        padding-bottom: 15px;
+        font-family: 'PT Sans', sans-serif;
+        font-size: 15px; 
+        }
+    .help-button {
+        cursor: pointer;
+        display: block;
+        background-color: #F7FCD2;
+        border-radius: 20px;
+        float: right;
+        font-size: 16px;
+        height: 19px;
+        width: 19px;
+        text-align: center;
+        color: #3f538a;
+        font-weight: bold;
+        font-family: helvetica;
+        }
+    .help-button2 {
+        cursor: pointer;
+        display: block;
+        background-color: #F7FCD2;
+        border-radius: 20px;
+        float: right;
+        font-size: 16px;
+        height: 19px;
+        width: 19px;
+        text-align: center;
+        color: #3f538a;
+        font-weight: bold;
+        font-family: helvetica;
+        }
+    .accordion-toggle {
+        cursor: pointer;
+        }
+    .accordion-content {
+        display: none;
+        padding-left: 20px;
+        padding-right: 20px;
+        line-height: 15px;
+        }
+    .accordion-content.default {
+        display: block;
+        }
+    .help-button:hover{
+        font-size: 18px;
+        height: 20px;
+        width: 20px;
+        }
+    .help-button2:hover{
+        font-size: 18px;
+        height: 20px;
+        width: 20px;
+        }
+    div.cartodb-popup p {
+        color: #4979b5;
+        }
+    div.cartodb-popup h1, div.cartodb-popup h2, div.cartodb-popup h3, div.cartodb-popup h4, div.cartodb-popup h5, div.cartodb-popup h6 {
+        display: block;
+        width: 190px;
+        margin: 0;
+        padding: 0;
+        font-weight: 700;
+        font-family: "Helvetica Neue",Helvetica,Arial;
+        color: #808080;
+        
+    </style>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+<!-- JAVASCRIPT SECTION --> 
+          
+<script>
+        
+var dataLayerDollarPerWatt;
+var dataLayerLMI;
+var dataLayerPACEandPermit;
+var dataLayerSolarize;
+    
+$(document).ready(function () {
+    cartodb.createVis('map','https://thenewschool.cartodb.com/u/jansynthaw/api/v2/viz/2df37bbe-1895-11e6-826c-0e787de82d45/viz.json',{
+            cartodb_logo: false, 
+            center_lat: 43,
+            center_lon: -75,
+            zoom: 7
+    })
+    .done(function (vis, layers) {
+        dataLayerDollarPerWatt = layers[1].getSubLayer(0); 
+        dataLayerLMI = layers[1].getSubLayer(1);
+        dataLayerPACEandPermit = layers[1].getSubLayer(2);
+        dataLayerSolarize = layers[1].getSubLayer(3); 
+        dataLayerSolarize.show();
+        dataLayerDollarPerWatt.hide();
+        dataLayerLMI.hide();
+        dataLayerPACEandPermit.hide();
+    });
+  
+  // change handlers for checkboxes
+$('#DPW').change(function () {
+    if ($(this).is(':checked')) {
+      dataLayerDollarPerWatt.show();
+    }
+    else {
+      dataLayerDollarPerWatt.hide();
+    }
+  })
+$('#LMI').change(function () {
+    if ($(this).is(':checked')) {
+      dataLayerLMI.show();
+    }
+    else {
+      dataLayerLMI.hide();
+    }
+  })
+$('#solarize_campaigns').change(function () {
+    if ($(this).is(':checked')) {
+      dataLayerSolarize.show();
+    }
+    else {
+      dataLayerSolarize.hide();
+    }
+  })
+
+// I'm having issues with these two checkboxes: they are both located in one dataset, so I have to use SQL to divide them into two sections that show up independently as psuedo-layers //
+
+$('#USP').change(function () {
+    if ($(this).is(':checked')) {
+      var sql = "SELECT * FROM merged_unified_pace WHERE unified_s IS null";
+          dataLayerPACEandPermit.setSQL(sql);
+            }
+         else {
+          dataLayerPACEandPermit.hide();
+           }
+  })
+$('#pace_financing').change(function () {
+    if ($(this).is(':checked')) {
+     var sql = "SELECT * FROM merged_unified_pace WHERE unified_s = 'yes'";
+          dataLayerPACEandPermit.setSQL(sql);
+            }
+        else {
+          dataLayerPACEandPermit.hide();
+        }
+    });
+
+    
+// DROPDOWN combined with info from RADIO BUTTON selection //
+    
+    $('.dropdown').change(function () {
+        var time = $(this).val();
+        var purchase_type= $('.accordion-toggle :input[type=radio]:checked').val();
+        var sql;
+        console.log (time, purchase_type)
+        if (time === 'before' && purchase_type === 'Direct Purchase' ) {
+              sql = "SELECT purchase_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'during' && purchase_type === 'Direct Purchase' ) {
+              sql = "SELECT purchase_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'after' && purchase_type === 'Direct Purchase' ) {
+              sql = "SELECT purchase_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'before' && purchase_type === 'Lease' ) {
+              sql = "SELECT lease_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'during' && purchase_type === 'Lease' ) {
+               sql = "SELECT lease_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'after' && purchase_type === 'Lease' ) {
+              sql = "SELECT lease_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'before' && purchase_type === 'PPA' ) {
+              sql = "SELECT ppa_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+       if (time === 'before' && purchase_type === 'PPA' ) {
+             sql = "SELECT ppa_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+       }
+        if (time === 'before' && purchase_type === 'PPA' ) {
+              sql = "SELECT ppa_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+       }          
+          dataLayerDollarPerWatt.setSQL(sql);
+    });
+     
+//    
+  
+// RADIO BUTTON combined with DROPDOWN data //
+//
+    $('.radio').change(function () {
+        var time = $('.dropdown').val();
+        var purchase_type = $(this).val();
+        var sql;
+        if (time === 'before' && purchase_type === 'Direct Purchase' ) {
+              sql = "SELECT purchase_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'during' && purchase_type === 'Direct Purchase' ) {
+              sql = "SELECT purchase_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'after' && purchase_type === 'Direct Purchase' ) {
+              sql = "SELECT purchase_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'before' && purchase_type === 'Lease' ) {
+              sql = "SELECT lease_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'during' && purchase_type === 'Lease' ) {
+               sql = "SELECT lease_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'after' && purchase_type === 'Lease' ) {
+              sql = "SELECT lease_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'before' && purchase_type === 'PPA' ) {
+              sql = "SELECT ppa_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'before' && purchase_type === 'PPA' ) {
+              sql = "SELECT ppa_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }
+        if (time === 'before' && purchase_type === 'PPA' ) {
+              sql = "SELECT ppa_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+        }          
+          dataLayerDollarPerWatt.setSQL(sql);
+    });
+    });
+    
+//Tooltip Checkboxes//        
+$(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+        
+    
+//Accordian Radio Buttons//
+$(document).ready(function($) {
+    $('.accordion').find('.accordion-toggle').click(function(){
+
+      //Expand or collapse this panel
+      $(this).next().slideToggle('slow');
+
+      //Hide the other panels
+      $(".accordion-content").not($(this).next()).slideUp('slow');
+
+    });
+  });  
+    
+</script>
+ 
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+ </head>
+    
+<!-- HTML SECTION -->   
+    
+<body>
+
+    <div class="map" id="map"></div>
+      
+    <div class="sidepanel">
+      <div class="wrapper">
+          
+          
+<!-- Title and Intro -->  
+        <h1>
+            The Impact of <br> Solarize Campaigns <br> on the <br>Cost of Going Solar
+                </h1>
+        <p>
+            Solarize campaigns bring together groups of potential solar customers through widespread outreach and education-- helping customers choose solar companies that are offering competitive, transparent pricing, and therefore making solar energy more affordable. In addition to group purchasing, streamlined permitting and financing may decrease the costs to consumers to install solar technology, especially in underserved, lower income communities.
+            <br><br>
+            In 2015, communities across New York launched more than 30 Solarize campaigns with support from the New York State Energy Research and Development Authority (NYSERDA). Hundreds of households and businesses are going solar as a result. Building on this success, the second round of Solarize campaigns launched spring 2016. 
+            <br><br>
+            The purpose of this map is to assist NYSERDA in identifying the financial impact of group purchasing for residential solar energy systems in New York State and areas of opportunity for future Solarize Campaigns.
+            <br>
+            <br>
+            For more information about group solar purchasing campaigns, please visit <a href="http://www.nyserda.ny.gov/All-Programs/Programs/NY-Sun/Communities/Shared-Solar">NYSERDA's website </a>.
+                    </p>
+           <br>
+          
+<!-- Layer Selection -->    
+        <div class="context">
+            
+            <h3>Select Map Layers:</h3>
+<!-- checkbox - solarize campaigns -->      
+    <input id="solarize_campaigns"
+           type="checkbox"
+           class="map-layer-selection"/checked>
+    <label for="solarize_campaign">2015 Solarize Campaigns</label>
+          
+        <br>
+          
+<!-- checkbox - PACE -->   
+    <input id="pace_financing"
+           type="checkbox"
+           class="map-layer-selection"/>
+    <label for="pace_financing">PACE Financing</label>
+    <span class="help-button"
+          data-toggle="tooltip"
+          data-placement="left"
+          data-original-title="Property Assessed Clean Energy: A means of financing energy efficiency upgrades or renewable energy installations for buildings.">?</span>
+    
+        <br>
+          
+<!-- checkbox - USP -->   
+    <input id="USP"
+           type="checkbox"
+           class="map-layer-selection"/>
+    <label for="USP">Unified Solar Permitting</label>
+    <span class="help-button"
+          data-toggle="tooltip"
+          data-placement="left"
+          data-original-title="Streamlines the municipal permitting processes and supports the growth of clean energy jobs across the state.">?</span>
+          
+         <br>
+          
+<!-- checkbox - LMI -->  
+    <input id="LMI"
+           type="checkbox"
+           class="map-layer-selection"/>
+    <label for="LMI">Low/Moderate Income Areas</label>
+    <span class="help-button"
+          data-toggle="tooltip"
+          data-placement="left"
+          data-original-title="Census block groups where over 51% of households are Low or Moderate Income (LMI).">?</span>
+        
+        <br>
+          
+<!-- checkbox - Dollar Per Watt -->  
+    <input id="DPW"
+           type="checkbox"
+           class="map-layer-selection"/>
+    <label for="DPW">Dollar Per Watt ($/W)</label>
+    <span class="help-button"
+          data-toggle="tooltip"
+          data-placement="left"
+          data-original-title="The cost to install a photovoltaic system ( = total project cost / total watts of the system)">?</span>
+        
+        <br>
+          
+<!-- DollarPerWatt - DROPDOWN menu -->        
+<form>
+    <select class="dropdown">
+        <option value="after">Choose a time period: </option>
+        <option value="before">Prior to launch of Solarize Campaigns (January - June, 2015)</option>
+        <option value="during">During Solarize Campaigns  (July - December, 2015)</option>
+        <option value="after">After Solarize Campaigns ended (January - April, 2016)</option>
+    </select>
+</form>
+          
+<!-- DollarPerWatt - radio buttons with accordian -->
+          
+          <h3> Type of Solar Ownership: </h3>
+
+<div class="accordion">
+  <form>
+      
+      <p class="accordion-toggle"> <input type="radio" name="DPW" value="Direct Purchase" checked> Direct Purchase </p>
+        <div class="accordion-content default">
+            <p2>When the customer purchases the system outright.</p2>
+        </div>
+      
+      <p class="accordion-toggle"><input type="radio" name="DPW" value="Lease"> Lease</p>
+        <div class="accordion-content">
+            <p2>When a homeowner enters into a service contract to pay scheduled, pre-determined payments to a solar leasing company, which installs and owns the solar system on the homeowner's property. The homeowner consumes whatever electricity the leased solar system produces. If the system provides excess electricity to the grid, the homeowner may get credit for that generation from the electrical utility.</p2>
+        </div>
+ 
+      <p class="accordion-toggle"><input type="radio" name="DPW" value="PPA"> Power Purchase Agreement (PPA)</p>
+        <div class="accordion-content">
+            <p2>When a homeowner contracts with a project developer that installs, owns, and operates a solar system on the homeowner's site and agrees to provide all of the electricity produced by the system to the homeowner at a fixed per-kilowatt-hour rate, typically competitive with the homeowner's electric utility rate.</p2>
+        </div>
+      </form>
+</div>
+            
+          
+<!-- FOOTER --> 
+          
+       <div class="footer">
+    
+<!-- Accordian -->
+            
+   <div class="accordion">
+       
+        <h3 class="accordion-toggle">About this Map >></h3>
+           <div class="accordion-content">
+               <p>
+                This map was created by <a href="https://www.linkedin.com/in/jansynthaw">Jansyn Thaw</a> for NYSERDA's NY-Sun team. Its purpose is to exemplify how interactive maps can be used for analysing and displaying program results.
+               </p>
+            </div>
+           
+    <h3 class="accordion-toggle">Sources >></h3>
+       <div class="accordion-content">
+        <p> In addition to data I received directly from NYSERDA, I used the following data sets:
+        </p>
+           <br>
+        <ul style="list-style-type:hyphen" >
+            <li>
+                <a href="https://data.ny.gov/Energy-Environment/Statewide-200kW-or-Less-Residential-Non-Residentia/3x8r-34rs">NY Open Data
+                </a>
+            <li>
+                <a href="http://www.cuny.edu/about/resources/sustainability/nyssolar/NYSolarSmartPermitWorkshops.html">Sustainable CUNY
+                </a>
+            </li>
+            <li>
+                <a href="http://commercial.energizeny.org/participating_municipalities">Energize NY
+                </a>
+            </li>
+            <li>
+                <a href="https://www.hudexchange.info/manage-a-program/acs-low-mod-summary-data-block-groups-places/">Department of Housing and Urban Development</a>
+            </li>
+            </ul>
+        </div>
+       
+           <h3 class="accordion-toggle">Methodology >></h3>
+           
+       <div class="accordion-content">
+            <p>
+           After cleaning and organizing the data sets, I geocoded my data using QGIS and <a href="http://www.gpsvisualizer.com/geocoder/">GPS Visualizer</a> and joined it to county and municipal-level polygons. I uploaded those shapefiles to <a href="https://thenewschool.cartodb.com/u/jansynthaw/viz/348f3bfa-fda8-11e5-835d-0e3ff518bd15/public_map">CartoDB</a>, where I styled the data and created infowindows and legends.<br><br>I built this webpage (hosted in a <a href="https://github.com/jansynthaw/">GitHub repository</a>) using HTML, CSS, and jQuery. I used SQL to link data from my CartoDB visualization to the various checkbox and dropdown options. I also used <a href="http://getbootstrap.com/getting-started/">Bootstrap</a>, Google Fonts, and a <a href="https://github.com/CartoDB/cartodb-publishing-templates">CartoDB publishing template</a> I found on GitHub. 
+           </p>
+        <br>
+       </div>
+           </div>
+           
+            <p>
+            Special thanks to <a href="http://ebrelsford.github.io/portfolio/"> Eric Brelsford </a>!</p>
+           <br>
+     </div>
+          
+        </body>
+      </html>
