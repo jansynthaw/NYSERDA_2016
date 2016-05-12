@@ -238,7 +238,7 @@ var dataLayerPACEandPermit;
 var dataLayerSolarize;
     
 $(document).ready(function () {
-    cartodb.createVis('map','https://thenewschool.cartodb.com/u/jansynthaw/api/v2/viz/2df37bbe-1895-11e6-826c-0e787de82d45/viz.json',{
+    cartodb.createVis('map','https://thenewschool.cartodb.com/u/jansynthaw/api/v2/viz/348f3bfa-fda8-11e5-835d-0e3ff518bd15/viz.json',{
             cartodb_logo: false, 
             center_lat: 43,
             center_lon: -75,
@@ -311,33 +311,34 @@ $('#pace_financing').change(function () {
         var sql;
         console.log (time, purchase_type)
         if (time === 'before' && purchase_type === 'Direct Purchase' ) {
-              sql = "SELECT purchase_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, purchase_doll_watt_jan_jun_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'during' && purchase_type === 'Direct Purchase' ) {
-              sql = "SELECT purchase_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, purchase_doll_watt_jul_dec_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'after' && purchase_type === 'Direct Purchase' ) {
-              sql = "SELECT purchase_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, purchase_doll_watt_jan_apr_16 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'before' && purchase_type === 'Lease' ) {
-              sql = "SELECT lease_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, lease_doll_watt_jan_apr_16 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'during' && purchase_type === 'Lease' ) {
-               sql = "SELECT lease_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+               sql = "SELECT *, lease_doll_watt_jul_dec_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'after' && purchase_type === 'Lease' ) {
-              sql = "SELECT lease_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, lease_doll_watt_jan_jun_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'before' && purchase_type === 'PPA' ) {
-              sql = "SELECT ppa_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, ppa_doll_watt_jan_apr_16 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
        if (time === 'before' && purchase_type === 'PPA' ) {
-             sql = "SELECT ppa_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+             sql = "SELECT *, ppa_doll_watt_jul_dec_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
        }
         if (time === 'before' && purchase_type === 'PPA' ) {
-              sql = "SELECT ppa_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
-       }          
-          dataLayerDollarPerWatt.setSQL(sql);
+              sql = "SELECT *, ppa_doll_watt_jan_jun_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
+       }            
+        dataLayerDollarPerWatt.setSQL(sql);
+       
     });
      
 //    
@@ -349,33 +350,34 @@ $('#pace_financing').change(function () {
         var purchase_type = $(this).val();
         var sql;
         if (time === 'before' && purchase_type === 'Direct Purchase' ) {
-              sql = "SELECT purchase_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, purchase_doll_watt_jan_jun_15 AS doll_watt FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'during' && purchase_type === 'Direct Purchase' ) {
-              sql = "SELECT purchase_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, purchase_doll_watt_jul_dec_15 AS doll_watt FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'after' && purchase_type === 'Direct Purchase' ) {
-              sql = "SELECT purchase_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, purchase_doll_watt_jan_apr_16 AS doll_watt FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'before' && purchase_type === 'Lease' ) {
-              sql = "SELECT lease_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, lease_doll_watt_jan_apr_16 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'during' && purchase_type === 'Lease' ) {
-               sql = "SELECT lease_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+               sql = "SELECT *, lease_doll_watt_jul_dec_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'after' && purchase_type === 'Lease' ) {
-              sql = "SELECT lease_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, lease_doll_watt_jan_jun_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'before' && purchase_type === 'PPA' ) {
-              sql = "SELECT ppa_doll_watt_jan_apr_16 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, ppa_doll_watt_jan_apr_16 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'before' && purchase_type === 'PPA' ) {
-              sql = "SELECT ppa_doll_watt_jul_dec_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, ppa_doll_watt_jul_dec_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }
         if (time === 'before' && purchase_type === 'PPA' ) {
-              sql = "SELECT ppa_doll_watt_jan_jun_15 FROM dollarperwatt_allpurchasetypes_alltimes";
+              sql = "SELECT *, ppa_doll_watt_jan_jun_15 AS doll_watt  FROM dollarperwatt_allpurchasetypes_alltimes";
         }          
-          dataLayerDollarPerWatt.setSQL(sql);
+        console.log (sql)    
+        dataLayerDollarPerWatt.setSQL(sql);
     });
     });
     
